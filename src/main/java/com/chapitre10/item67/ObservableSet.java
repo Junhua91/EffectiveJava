@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import com.chapitre10.item67.ForwardingSet;
+import com.chapitre10.item67.SetObserver;
 
 public class ObservableSet<E> extends ForwardingSet<E> {
 
