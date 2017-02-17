@@ -41,7 +41,7 @@ public class CalendarTest {
 		
 		
 		calendar.setTime(new Date());
-		calendar.add(Calendar.MONTH, 5);
+		calendar.add(Calendar.MONTH, 7);
 		calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
 		
 		 int day = calendar.get(Calendar.DAY_OF_WEEK);
