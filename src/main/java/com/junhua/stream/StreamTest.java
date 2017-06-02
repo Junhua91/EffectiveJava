@@ -21,6 +21,8 @@ public class StreamTest {
 		
 		reduceTest();
 		
+		reduceTest2();
+		
 		collectTest();
 		
 		filterTest();
@@ -28,6 +30,12 @@ public class StreamTest {
 		peekTest();
 		
 		peekTest2();
+		
+		mapTest();
+		
+		matchTest1();
+
+		matchTest2();
 	}
 	
 	
@@ -83,6 +91,18 @@ public class StreamTest {
 	}
 	
 	/**
+	 * <U> U reduce(U identity,
+              BiFunction<U, ? super T, U> accumulator,
+              BinaryOperator<U> combiner);
+	 */
+	public static void reduceTest2(){
+		System.out.println(Arrays.asList('w', 'o', 'l', 'f') 
+				.stream() 
+				.reduce("",(c,s1) -> c + s1, 
+				(s2,s3) -> s2 + s3));
+	}
+	
+	/**
 	 * it lets us get data out of streams and into another form
 	 */
 	public static void collectTest(){
@@ -113,7 +133,31 @@ public class StreamTest {
 		
 		stream.forEach(System.out::println);;
 //		stream.flatMap(l->l.stream()).forEach(System.out::println);;
-		
 	}
 	
+	//map is not a terminal
+	public static void mapTest(){
+		Stream<String> stream = Stream.iterate("", (s) -> s + "1");
+		System.out.println(stream.limit(2).map(x -> x + "2"));
+		//java.util.stream.ReferencePipeline$3@27973e9b
+	}
+	
+	
+	public static void matchTest1(){
+		Predicate<? super String> predicate = s -> s.startsWith("g");
+		Stream<String> stream1 = Stream.generate(() -> "growl! ");
+		Stream<String> stream2 = Stream.generate(() -> "growl! ");
+		boolean b1 = stream1.anyMatch(predicate);
+		boolean b2 = stream2.allMatch(predicate);
+		System.out.println(b1 + " " + b2);
+		// hang
+	}
+	public static void matchTest2(){
+		Predicate<? super String> predicate = s -> s.length() > 3;
+		Stream<String> stream = Stream.iterate("-", (s) -> s + s);
+		boolean b1 = stream.noneMatch(predicate);
+		boolean b2 = stream.anyMatch(predicate);
+		System.out.println(b1 + " " + b2);
+		//stream has already been operated upon or closed
+	}
 }
