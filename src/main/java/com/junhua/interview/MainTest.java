@@ -10,6 +10,11 @@ public class MainTest {
 		test2();
 
 		test3_1();
+		
+		test4();
+		
+		test5();
+		
 	}
 
 	public static boolean find(int[][] array, int value) {
@@ -132,5 +137,93 @@ public class MainTest {
 		printListNode(root);
 		printListNode2(root);
 	}
+	
+	public static class BinaryTreeNode{
+		BinaryTreeNode leftTree;
+		BinaryTreeNode rightTree;
+		int value;
+	}
+	
+	public static BinaryTreeNode construct(int[]preOrder, int[]inOrder){
+		if(preOrder==null || inOrder==null || inOrder.length != preOrder.length)
+			return null;
+		return construct(preOrder, 0, preOrder.length-1, inOrder, 0, inOrder.length-1);
+	}
+	
+	public static BinaryTreeNode construct(int[]preOrder, int start1, int end1, int[]inOrder, int start2, int end2){
+		
+		if(start1>end1)return null;
+		
+		int index= start2 ;
+		
+		while(index<=end2 && inOrder[index]!=preOrder[start1]){
+			index++;
+		}
+		
+		BinaryTreeNode bts = new BinaryTreeNode();
+		
+		bts.value = preOrder[start1];		
+		bts.leftTree = construct(preOrder, start1+1, index-start2+start1 , inOrder, start2, index-1);
+		bts.rightTree = construct(preOrder, start1+index-start2+1, end1, inOrder, index + 1, end2);
+		
+		return bts;
+	}
+	
 
+	public static void printBTS(BinaryTreeNode root){
+		if(root!=null){
+			System.out.print(root.value);
+			printBTS(root.leftTree);
+			printBTS(root.rightTree);
+		}
+	}
+	
+	public static void printBTS2(BinaryTreeNode root){
+		if(root!=null){
+			printBTS(root.leftTree);
+			System.out.print(root.value);
+			printBTS(root.rightTree);
+		}
+	}
+	
+	private static void test4() {  
+		System.out.println("test4");
+        int[] preorder = {1, 2, 4, 7, 3, 5, 6, 8};  
+        int[] inorder = {4, 7, 2, 1, 5, 3, 8, 6};  
+        BinaryTreeNode root = construct(preorder, inorder);  
+        printBTS(root);
+        System.out.println();
+        printBTS2(root);
+    }  
+	
+	public static int findMin(int[] array){
+		
+		int start = 0;
+		int end = array.length-1;
+		int mid = end;
+		
+		while(array[start]>=array[end]){
+			if(end - start	== 1)return array[end];
+			mid = start + (end-start)/2;
+			if(array[mid] >= array[start])start = mid;
+			if(array[mid] <= array[end]) end = mid;
+		}
+			return array[mid];
+	}
+	
+	public static void test5(){
+		System.out.println("test5");
+        int[] array1 = {3, 4, 5, 1, 2};  
+        System.out.println(findMin(array1));  
+	}
+	
+	public static int fibonacci(int n){
+		if(n == 0)return 0;
+		if(n == 1)return 1;
+		
+		int result=0;
+		
+		
+		return result;
+	}
 }
