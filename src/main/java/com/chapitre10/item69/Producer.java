@@ -23,11 +23,11 @@ public class Producer implements Runnable {
 			res = Addition(rand.nextInt(100), rand.nextInt(50));
 			System.out.println("Produced: " + res);
 			queue.put(res);
-			Thread.sleep(1000);
+//			Thread.sleep(1000);
 			res = Addition(rand.nextInt(100), rand.nextInt(50));
 			System.out.println("Produced: " + res);
 			queue.put(res);
-			Thread.sleep(1000);
+//			Thread.sleep(1000);
 			res = Addition(rand.nextInt(100), rand.nextInt(50));
 			System.out.println("Produced: " + res);
 			queue.put(res);

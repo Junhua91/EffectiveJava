@@ -15,6 +15,9 @@ public class MainTest {
 		
 		test5();
 		
+		test7();
+		
+		test8();
 	}
 
 	public static boolean find(int[][] array, int value) {
@@ -225,5 +228,123 @@ public class MainTest {
 		
 		
 		return result;
+	}
+	
+	public static double power(double base, int exponent){
+		double result=1;
+		if(exponent == 0)return 1;
+		while(exponent>0){
+			result *= base;
+			exponent--;			
+		}
+		
+		while(exponent<0){
+			result *= (1/base);
+			exponent++;
+		}
+		return result;
+	}
+	
+	public static boolean doubleEqual(double a, double b ){
+		if(a-b<0.000001 && a-b>-0.000001)
+			return true;
+		else return false;
+	}
+	
+	public static int absExponent(int a){
+		if(a<0)return -a;
+		else return a;
+	}
+	
+	public static double power2(double base, int exponent){
+		if( doubleEqual(base, 0)&& exponent == 0)
+			throw new ArithmeticException();
+		
+		if(exponent==1)return base;
+		if(exponent==0)return 1;
+		
+		double  result = power2(base, exponent>>1);
+		result *= result;
+		
+		if(exponent%2==1)result*=base;
+		
+		return result;
+	}
+	
+	public static double power3(double base, int exponent){
+		
+		double result =1;
+		int exp =exponent;
+		while(exponent !=0){
+			exponent /= 2;
+			result*=(base*base);
+		}
+		
+		if(exp%2==1)result*=base;	
+		return result;
+	}
+	
+	
+	public static double doPower(double base, int exponent){
+		int exp = absExponent(exponent);
+		double result = power2(base, exp);
+		
+		if(exponent>0)
+			return  result;
+		else return 1/result;
+	}
+	
+	public static double doPower2(double base, int exponent){
+		int exp = absExponent(exponent);
+		double result = power3(base, exp);
+		
+		if(exponent>0)
+			return  result;
+		else return 1/result;
+	}
+	
+	public static void test7(){
+		System.out.println("test7");
+		System.out.println(doPower(2, 10));
+		System.out.println(doPower(2, -6));
+		System.out.println(doPower2(2, -6));
+		System.out.println(doPower2(2, 9));
+	}
+	
+	public static void printOneToNthDigits(int n) {  
+        if (n < 1) {  
+            throw new RuntimeException("The input number must larger than 0");  
+        }  
+        int[] arr = new int[n];  
+        printOneToNthDigits(0, arr);  
+    }  
+	
+	public static void printOneToNthDigits(int n, int[] arr) {  
+        if (n >= arr.length) {  
+            printArray(arr);  
+        } else {  
+            for (int i = 0; i <= 9; i++) {  
+                arr[n] = i;  
+                printOneToNthDigits(n + 1, arr);  
+            }  
+        }  
+    }  
+	
+	public static void printArray(int[] arr) {  
+        int index = 0;  
+        while (index < arr.length && arr[index] == 0) {  
+            index++;  
+        }  
+  
+        for (int i = index; i < arr.length; i++) {  
+            System.out.print(arr[i]);  
+        }  
+        if (index < arr.length) {  
+            System.out.println();  
+        }  
+    }  
+	
+	public static void test8(){
+		 printOneToNthDigits(2);  
 	}
 }
