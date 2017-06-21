@@ -29,7 +29,6 @@ public class GenericTest<K, V> {
 		//super bounded
 		List<? super Integer> list5 = new ArrayList<Number>();
 		// List<? extends Integer> list6 = new ArrayList<Number>();
-
 	}
 	
 	public static <T> T Fun(T t){
