@@ -27,6 +27,6 @@ public class FutureTaskTest {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-		
+		executor.shutdown();
 	}
 }
